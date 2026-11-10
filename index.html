@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>生日快乐，小纯 · 又长大一岁</title>
+<meta name="description" content="小羊写给小纯的生日祝福：又长大一岁，生日快乐。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F1626'/%3E%3Crect x='12.5' y='14' width='7' height='12' rx='2' fill='%23F5EDDF'/%3E%3Cpath d='M16 12.6c-2-2.2-1-4 0-6 1 2 2 3.8 0 6z' fill='%23E7A469'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="preconnect" href="https://sf3-scmcdn-cn.feishucdn.com" crossorigin>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700&amp;family=Noto+Sans+SC:wght@300;400;500&amp;display=swap">
+<style>
+  /* ===== tokens ===== */
+  :root {
+    --bg: #0F1626;
+    --bg-2: #131C2E;
+    --fg: #F5EDDF;
+    --fg-soft: rgba(245, 237, 223, 0.62);
+    --fg-faint: rgba(245, 237, 223, 0.34);
+    --line: rgba(245, 237, 223, 0.16);
+    --flame: #E7A469;
+    --flame-deep: #C2793C;
+    --veil: rgba(15, 22, 38, 0.92);
+    --wax: #EFE3CB;
+    --wax-shade: #D9C6A6;
+    --plate: #C9B698;
+    --shadow: rgba(0, 0, 0, 0.36);
+  }
+  body.dawn {
+    --bg: #F4EADA;
+    --bg-2: #FAF2E5;
+    --fg: #1B1B1F;
+    --fg-soft: rgba(27, 27, 31, 0.66);
+    --fg-faint: rgba(27, 27, 31, 0.38);
+    --line: rgba(27, 27, 31, 0.16);
+    --flame: #C2793C;
+    --flame-deep: #9E5C29;
+    --veil: rgba(244, 234, 220, 0.92);
+    --wax: #E9D6B6;
+    --wax-shade: #C8AC86;
+    --plate: #C2A279;
+    --shadow: rgba(122, 92, 58, 0.24);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.9;
+    transition: background-color 1.7s ease, color 1.7s ease;
+    overflow-x: hidden;
+  }
+
+  /* 夜与晨的背景层，位于内容之下 */
+  .wash {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 1.7s ease;
+  }
+  .wash--night {
+    background:
+      radial-gradient(120% 80% at 18% 8%, rgba(52, 74, 116, 0.55) 0%, rgba(15, 22, 38, 0) 62%),
+      radial-gradient(90% 60% at 88% 92%, rgba(38, 30, 46, 0.6) 0%, rgba(15, 22, 38, 0) 70%);
+  }
+  .wash--dawn {
+    background:
+      radial-gradient(130% 70% at 78% -6%, rgba(255, 214, 160, 0.85) 0%, rgba(244, 234, 220, 0) 58%),
+      radial-gradient(100% 60% at 12% 100%, rgba(233, 199, 165, 0.6) 0%, rgba(244, 234, 220, 0) 70%);
+    opacity: 0;
+  }
+  body.dawn .wash--night { opacity: 0; }
+  body.dawn .wash--dawn { opacity: 1; }
+
+  /* ===== hero ===== */
+  .hero { position: relative; padding-bottom: 1.5rem; }
+
+  .hero-media {
+    position: relative;
+    height: clamp(230px, 48svh, 560px);
+    overflow: hidden;
+  }
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 44%;
+    filter: saturate(1.02) brightness(1);
+    transition: filter 1.7s ease;
+  }
+  body.dawn .hero-media img { filter: brightness(1.1) saturate(0.94) sepia(0.14); }
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(15, 22, 38, 0) 0%,
+      rgba(15, 22, 38, 0.04) 52%,
+      var(--veil) 86%,
+      var(--bg) 99%);
+    transition: background 1.7s ease;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    margin-top: 0.9rem;
+    padding: 0 22px;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dateline {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 12.5px;
+    letter-spacing: 0.28em;
+    color: var(--fg-faint);
+    margin: 0 0 1.1rem;
+    transition: color 1.7s ease;
+  }
+  .dateline::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    transition: background 1.7s ease;
+  }
+
+  h1 {
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    font-weight: 600;
+    font-size: clamp(3.1rem, 14.5vw, 6.75rem);
+    line-height: 1.04;
+    letter-spacing: 0.04em;
+    margin: 0 0 1.15rem;
+    color: var(--fg);
+    transition: color 1.7s ease;
+  }
+  h1 .small {
+    display: block;
+    font-size: 0.3em;
+    letter-spacing: 0.3em;
+    font-weight: 400;
+    color: var(--fg-soft);
+    margin-top: 0.9rem;
+  }
+
+  .hero-sub {
+    font-size: 1.0625rem;
+    line-height: 1.95;
+    color: var(--fg-soft);
+    max-width: 24rem;
+    margin: 0 0 2.2rem;
+    transition: color 1.7s ease;
+  }
+
+  .cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--fg-faint);
+    transition: color 1.7s ease;
+  }
+  .cue svg { width: 13px; height: 22px; opacity: 0.8; }
+  .cue-arrow { animation: nudge 2.4s ease-in-out infinite; }
+  @keyframes nudge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  /* ===== 信 ===== */
+  .letter {
+    padding: 1.75rem 22px 0;
+    max-width: 37rem;
+    margin: 0 auto;
+  }
+
+  .lede {
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    font-weight: 600;
+    font-size: clamp(1.55rem, 5.6vw, 2.1rem);
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    margin: 0 0 1.9rem;
+  }
+
+  .prose p {
+    margin: 0 0 1.15rem;
+    line-height: 2.05;
+    color: var(--fg);
+    transition: color 1.7s ease;
+  }
+  .prose p + p { margin-top: 1.15rem; }
+  .prose .quiet { color: var(--fg-soft); }
+
+  .asks {
+    margin: 2.6rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    transition: border-color 1.7s ease;
+  }
+  .asks-title {
+    font-size: 12.5px;
+    letter-spacing: 0.2em;
+    color: var(--fg-faint);
+    margin: 0 0 1.15rem;
+  }
+  .asks ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .asks li {
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+    line-height: 1.95;
+  }
+  .asks li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    margin-top: 0.85rem;
+    border-radius: 50%;
+    background: var(--flame);
+    justify-self: start;
+    transition: background 1.7s ease;
+  }
+
+  /* ===== 蜡烛 ===== */
+  .ritual {
+    text-align: center;
+    padding: 2.9rem 22px 2.6rem;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+  .ritual-kicker {
+    font-size: 12.5px;
+    letter-spacing: 0.24em;
+    color: var(--fg-faint);
+    margin: 0 0 1.1rem;
+  }
+  .ritual-text {
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    font-weight: 400;
+    font-size: clamp(1.15rem, 4.2vw, 1.4rem);
+    line-height: 1.85;
+    margin: 0 0 0.4rem;
+  }
+  .ritual-hint {
+    font-size: 13.5px;
+    color: var(--fg-faint);
+    letter-spacing: 0.08em;
+    margin: 0 0 0.6rem;
+    transition: color 1.7s ease;
+  }
+  body.dawn .ritual-hint { display: none; }
+
+  .candle-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 14px;
+    width: 148px;
+    background: none;
+    border: 0;
+    border-radius: 18px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .candle-btn:focus-visible {
+    outline: 2px solid var(--flame);
+    outline-offset: -2px;
+    border-radius: 14px;
+  }
+  .candle-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    -webkit-user-select: none;
+    user-select: none;
+    filter: drop-shadow(0 16px 20px var(--shadow));
+    transition: filter 1.7s ease;
+  }
+  .wax { fill: var(--wax); transition: fill 1.7s ease; }
+  .wax-shade { fill: var(--wax-shade); opacity: 0.7; transition: fill 1.7s ease; }
+  .drip { fill: var(--wax); transition: fill 1.7s ease; }
+  .plate { fill: var(--plate); transition: fill 1.7s ease; }
+  .plate-rim { fill: var(--wax-shade); opacity: 0.55; transition: fill 1.7s ease; }
+
+  .halo {
+    transition: opacity 0.9s ease;
+    animation: breathe 4.4s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 0.86; }
+  }
+
+  .flame {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flicker 1.35s ease-in-out infinite;
+    transition: opacity 0.28s ease, transform 0.4s ease;
+  }
+  @keyframes flicker {
+    0%, 100% { transform: scale(1, 1) rotate(-1.2deg); }
+    32% { transform: scale(0.94, 1.06) rotate(1.6deg); }
+    66% { transform: scale(1.03, 0.95) rotate(0.4deg); }
+  }
+
+  .smoke {
+    stroke: var(--fg);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    fill: none;
+    opacity: 0;
+    transition: stroke 1.7s ease;
+  }
+
+  .candle-btn.is-out .flame { opacity: 0; transform: scale(0.3); animation: none; }
+  .candle-btn.is-out .halo { opacity: 0; animation: none; }
+  .candle-btn.is-out .smoke { animation: smokeUp 2.2s ease-out forwards; }
+  @keyframes smokeUp {
+    0% { opacity: 0; transform: translateY(6px) scale(1); }
+    22% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-26px) scale(1.16); }
+  }
+
+  .wish {
+    display: none;
+    max-width: 30rem;
+    margin: 0.8rem auto 0;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  .candle-btn-wrap { display: flex; justify-content: center; }
+  body.dawn .wish { display: block; animation: fadeUp 1.05s ease 0.25s both; }
+  .wish p {
+    margin: 0 0 0.9rem;
+    line-height: 1.95;
+  }
+  .wish .wish-strong {
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    font-size: clamp(1.3rem, 4.8vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .wish .wish-soft { color: var(--fg-soft); font-size: 0.97rem; }
+  .wish .wish-sign {
+    color: var(--fg-faint);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+  }
+
+  .reset {
+    margin-top: 1.4rem;
+    display: inline-block;
+    padding: 11px 20px;
+    font-family: inherit;
+    font-size: 13.5px;
+    letter-spacing: 0.1em;
+    color: var(--fg-soft);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .reset:hover { color: var(--fg); border-color: var(--flame); }
+  .reset:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; }
+  body.dawn .reset { visibility: visible; opacity: 1; }
+
+  /* ===== 结尾 ===== */
+  .ending {
+    padding: 3.2rem 22px 3.6rem;
+    max-width: 38rem;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    transition: border-color 1.7s ease;
+  }
+  .ending-big {
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 6.4vw, 2.3rem);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    color: var(--fg);
+    margin: 0 0 1.3rem;
+    transition: color 1.7s ease;
+  }
+  .ending-line {
+    font-size: 1rem;
+    line-height: 2.05;
+    color: var(--fg-soft);
+    margin: 0 0 1.5rem;
+    transition: color 1.7s ease;
+  }
+  .ending-sign {
+    font-size: 0.93rem;
+    letter-spacing: 0.1em;
+    color: var(--fg-faint);
+    margin: 0;
+  }
+
+  .foot {
+    padding: 0 22px 3rem;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--fg-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition-duration: 0.01ms !important; }
+    body.dawn .wish { transition: none !important; }
+  }
+
+  /* 响应式：正文行长在窄屏收紧，宽屏略微放宽 */
+  @media (min-width: 768px) {
+    .hero-media { height: clamp(360px, 58svh, 580px); }
+    .hero-copy { padding: 0 32px; }
+    .letter { padding: 3.5rem 32px 0; }
+    .prose p { font-size: 1.0625rem; }
+    .hero-sub { font-size: 1.125rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wash wash--night" aria-hidden="true"></div>
+<div class="wash wash--dawn" aria-hidden="true"></div>
+
+<main>
+  <!-- ===== 视图：开场 ===== -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/YCT6bIfFjohGeFxrNxAcf7vYnVc"
+           alt="深夜书桌：台灯、摊开的书、一杯冒着热气的茶" fetchpriority="high">
+    </div>
+    <div class="hero-copy">
+      <p class="dateline">生日这天</p>
+      <h1>生日快乐<span class="small">小纯，又长大一岁</span></h1>
+      <p class="hero-sub">今天不聊卷子，也不聊还剩多少天。今天只聊你。</p>
+      <p class="cue">
+        往下有一句话
+        <svg class="cue-arrow" viewBox="0 0 13 22" aria-hidden="true">
+          <path d="M6.5 1v18M1.5 14l5 6 5-6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== 视图：信 ===== -->
+  <section class="letter">
+    <p class="lede">小纯，今天不用那么懂事。</p>
+    <div class="prose">
+      <p>长大这件事好像一直没什么仪式。只是某天你忽然发现，去年觉得撑不过去的事，今年能自己扛下来了。</p>
+      <p>这一年你确实变了。更能扛，也稍微会心疼自己一点——虽然还是常常忘记吃饭。</p>
+      <p class="quiet">考研的事，我知道它一直压在你心上。</p>
+      <p>可它只是你今年在做的一件大事，不是你整个人。考成什么样，你也还是你。</p>
+      <p>所以今天先把它放到一边。你只需要负责过生日。</p>
+    </div>
+
+    <div class="asks">
+      <p class="asks-title">今天只做三件事</p>
+      <ul>
+        <li>吃点好的。别再是食堂打包的那一份。</li>
+        <li>早点睡，不用掐着表算还能睡几个睡眠周期。</li>
+        <li>许个愿。说出来，或者留在心里，都算。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 视图：吹蜡烛 ===== -->
+  <section class="ritual">
+    <p class="ritual-kicker">还有一件小事</p>
+    <p class="ritual-text">把蜡烛吹了，许个愿。</p>
+    <p class="ritual-hint">点一下火苗</p>
+
+    <div class="candle-btn-wrap">
+      <button class="candle-btn" id="candleBtn" type="button" aria-pressed="false" aria-label="吹灭蜡烛">
+        <svg class="candle-svg" viewBox="0 0 120 200" aria-hidden="true" focusable="false">
+          <defs>
+            <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFC98A" stop-opacity="0.85"/>
+              <stop offset="55%" stop-color="#E7A469" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#E7A469" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#FFE2A8"/>
+              <stop offset="45%" stop-color="#F2B26E"/>
+              <stop offset="100%" stop-color="#E08A42"/>
+            </linearGradient>
+          </defs>
+          <circle class="halo" cx="60" cy="58" r="48" fill="url(#haloGrad)"/>
+          <path class="smoke" d="M60 84 C 53 76, 67 70, 60 60 C 53 50, 67 44, 60 34"/>
+          <ellipse class="plate" cx="60" cy="174" rx="31" ry="7"/>
+          <ellipse class="plate-rim" cx="60" cy="173" rx="24" ry="4.6"/>
+          <path class="wax" d="M45 100 h30 v62 a9 9 0 0 1 -9 9 h-12 a9 9 0 0 1 -9 -9 z"/>
+          <path class="wax-shade" d="M45 100 h8 v62 a9 9 0 0 1 -8 9 z"/>
+          <ellipse cx="60" cy="100" rx="15" ry="4.8" fill="#F8F0DE"/>
+          <path d="M46 101 c -1.6 4, -1.2 9, 0.8 12.6 c 1.4 -3.4, 1.6 -8, 0.6 -12.6 z" fill-opacity="0.9" class="drip"/>
+          <line x1="60" y1="99.5" x2="60" y2="89" stroke="#3B2E20" stroke-width="2.1" stroke-linecap="round"/>
+          <g class="flame">
+            <path d="M60 85 C 51.5 76.5, 55.6 68, 60 57 C 64.6 68, 68.5 76.5, 60 85 Z" fill="url(#flameGrad)"/>
+            <path d="M60 81.5 C 56 75.5, 58 70.5, 60 65.5 C 62.2 70.5, 64 75.5, 60 81.5 Z" fill="#FFF6DE" opacity="0.92"/>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <div class="wish" id="wish" aria-live="polite">
+      <p class="wish-strong">又长大一岁，这一年会好的。</p>
+      <p class="wish-soft">愿你想去的地方要你。愿你少熬几个夜，多睡一会儿。愿你想要的东西，自己走到你面前。</p>
+      <p class="wish-soft">实现了也好，差一点也好。生日是这样，十二月也是。</p>
+      <p class="wish-soft">小羊都在。</p>
+      <p class="wish-sign">许的愿，我帮你记着</p>
+      <button class="reset" id="resetBtn" type="button">再把蜡烛点上</button>
+    </div>
+  </section>
+
+  <!-- ===== 视图：结尾 ===== -->
+  <section class="ending">
+    <p class="ending-big">生日快乐，小纯。</p>
+    <p class="ending-line">以后每年的这一天，我都想在。<br>你往前走的时候，我也在。</p>
+    <p class="ending-sign">—— 小羊</p>
+  </section>
+
+  <p class="foot">这一页会一直留在这里</p>
+</main>
+
+<script>
+  (function () {
+    var btn = document.getElementById('candleBtn');
+    var reset = document.getElementById('resetBtn');
+    var body = document.body;
+
+    function setOut(out) {
+      btn.classList.toggle('is-out', out);
+      body.classList.toggle('dawn', out);
+      btn.setAttribute('aria-pressed', out ? 'true' : 'false');
+      btn.setAttribute('aria-label', out ? '重新点亮蜡烛' : '吹灭蜡烛');
+    }
+
+    btn.addEventListener('click', function () {
+      setOut(!btn.classList.contains('is-out'));
+    });
+
+    reset.addEventListener('click', function () {
+      setOut(false);
+      btn.focus({ preventScroll: true });
+      window.scrollTo({
+        top: btn.getBoundingClientRect().top + window.pageYOffset - 120,
+        behavior: 'smooth'
+      });
+    });
+  })();
+</script>
+</body>
+</html>
